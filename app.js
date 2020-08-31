@@ -1,4 +1,4 @@
-/*Imports */
+/*Imports e inicializações*/
 
 import express from 'express';
 import mongoose from 'mongoose';
@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(accountRouter);
 
-/*Conexao com o MongoDB*/
+/*Conexao com o banco de dados do MongoDB*/
 (async () => {
   try {
     await mongoose.connect(
