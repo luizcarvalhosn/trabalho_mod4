@@ -235,6 +235,22 @@ app.patch('/transferRicos', async (_req, res) => {
   }
 });
 
-/* Aqui estava o SALDO COM PUT */
+/* Aqui está o SALDO COM PUT - ITEM 6B - PARA TESTAR GIT*/
+app.get('/saldo', async (req, res) => {
+  const { agencia, conta } = req.body;
+  try {
+    const operation = await accountModel.findOne({
+      $and: [{ agencia: agencia }, { conta: conta }],
+    });
+
+    if (!operation) {
+      res.status(404).send(`Conta ${conta} não existe`);
+    }
+    const retorno = { nome: operation.name, saldoAtual: operation.balance };
+    res.status(200).send(retorno);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 export { app as accountRouter };
